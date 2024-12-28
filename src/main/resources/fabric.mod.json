@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "discord-presence",
+  "version": "${version}",
+  "name": "Discord Presence",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/discord-presence/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "preLaunch": [
+      "dev.pfaff.discordrpc.minecraft.client.DiscordPresence"
+    ],
+    "client": [
+      "dev.pfaff.discordrpc.minecraft.client.DiscordPresence"
+    ]
+  },
+  "mixins": [
+    "discord-presence.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "*"
+  }
+}
