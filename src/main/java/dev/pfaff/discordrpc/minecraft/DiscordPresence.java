@@ -19,6 +19,8 @@ public final class DiscordPresence implements ClientModInitializer, PreLaunchEnt
 
 	private static final DiscordRPC client = new DiscordRPC("1321685210915536977", 0, DiscordPresence::sendActivity);
 
+	private static final Object sendLock = new Object();
+
 	@Override
 	public void onPreLaunch() {
 		sendActivity();
@@ -57,12 +59,16 @@ public final class DiscordPresence implements ClientModInitializer, PreLaunchEnt
 	}
 
 	private static void sendActivity() {
-		try {
-			client.setActivity(PID, activity);
-			LOGGER.debug("Set activity");
-		} catch (NotConnectedException ignored) {
-		} catch (IOException e) {
-			LOGGER.error("Caught error while setting activity", e);
-		}
+		Thread.startVirtualThread(() -> {
+			synchronized (sendLock) {
+				try {
+					client.setActivity(PID, activity);
+					LOGGER.debug("Set activity");
+				} catch (NotConnectedException ignored) {
+				} catch (IOException e) {
+					LOGGER.error("Caught error while setting activity", e);
+				}
+			}
+		});
 	}
 }
