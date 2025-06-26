@@ -29,7 +29,7 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    implementation "dev.pfaff.discord-rpc:discord-rpc:1.0-SNAPSHOT"
+    implementation "dev.pfaff.discord-rpc:discord-rpc:0.1.0"
 }
 
 processResources {
