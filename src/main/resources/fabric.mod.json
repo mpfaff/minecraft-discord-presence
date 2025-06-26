@@ -11,10 +11,10 @@
   "environment": "client",
   "entrypoints": {
     "preLaunch": [
-      "dev.pfaff.discordrpc.minecraft.client.DiscordPresence"
+      "dev.pfaff.discordrpc.minecraft.DiscordPresence"
     ],
     "client": [
-      "dev.pfaff.discordrpc.minecraft.client.DiscordPresence"
+      "dev.pfaff.discordrpc.minecraft.DiscordPresence"
     ]
   },
   "mixins": [

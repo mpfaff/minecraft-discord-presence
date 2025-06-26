@@ -1,4 +1,4 @@
-package dev.pfaff.discordrpc.minecraft.client;
+package dev.pfaff.discordrpc.minecraft;
 
 import dev.pfaff.discordrpc.*;
 import net.fabricmc.api.ClientModInitializer;
