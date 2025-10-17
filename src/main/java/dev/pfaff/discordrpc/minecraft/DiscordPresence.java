@@ -5,6 +5,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,9 +16,26 @@ public final class DiscordPresence implements ClientModInitializer, PreLaunchEnt
 
 	public static final int PID = Math.toIntExact(ProcessHandle.current().pid());
 
-	private static final Activity activity = new Activity("Launching", null, System.currentTimeMillis());
+	private static final Activity activity;
 
-	private static final DiscordRPC client = new DiscordRPC("1321685210915536977", 0, DiscordPresence::sendActivity);
+	static {
+		long now = System.currentTimeMillis();
+		activity = new Activity("Minecraft",
+				Activity.Type.PLAYING,
+				now,
+				"Launching",
+				null,
+				now);
+	}
+
+	private static final DiscordRPC client = new DiscordRPC("1321685210915536977", 0, DiscordPresence::sendActivity, (source, level, message, throwable) -> {
+		LogManager.getLogger(source).log(switch (level) {
+			case ERROR -> Level.ERROR;
+			case WARN -> Level.WARN;
+			case INFO -> Level.INFO;
+			case DEBUG -> Level.DEBUG;
+		}, message::get, throwable);
+	});
 
 	private static final Object sendLock = new Object();
 

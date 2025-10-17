@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.9-SNAPSHOT'
+    id 'fabric-loom' version '1.11-SNAPSHOT'
 }
 
 version = project.mod_version
@@ -29,7 +29,7 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    implementation "dev.pfaff.discord-rpc:discord-rpc:0.1.0"
+    implementation "dev.pfaff.discord-rpc:discord-rpc:0.3.2"
 }
 
 processResources {
